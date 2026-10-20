@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>WMS | Smart Waste Management System</title>
+  <meta name="description"
+        content="File complaints, track sanitation progress and build cleaner communities.">
+
+  <link rel="icon" href="assets/img/clients/Capture.PNG">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+  <!-- Bootstrap and icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #10b981;
+      --primary-dark: #059669;
+      --primary-subtle: #ecfdf5;
+      --navy: #0f172a;
+      --slate: #334155;
+      --muted: #64748b;
+      --bg-soft: #f8fafc;
+      --white: #ffffff;
+      --border-color: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 85px;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Plus Jakarta Sans", sans-serif;
+      color: var(--slate);
+      background: var(--white);
+      line-height: 1.7;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .navbar {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+      padding: 14px 0;
+    }
+
+    .navbar-brand {
+      font-weight: 800;
+      color: var(--navy) !important;
+      letter-spacing: -0.5px;
+      font-size: 1.35rem;
+    }
+
+    .brand-icon {
+      color: var(--primary);
+      font-size: 1.6rem;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+
+    .nav-link {
+      color: var(--slate);
+      font-weight: 600;
+      font-size: 0.93rem;
+      margin: 0 6px;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus {
+      color: var(--primary-dark);
+    }
+
+    .btn-action-primary {
+      background: var(--primary);
+      color: white;
+      padding: 10px 22px;
+      border-radius: 10px;
+      font-weight: 700;
+      border: none;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-action-primary:hover {
+      background: var(--primary-dark);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45);
+    }
+
+    .btn-outline-custom {
+      border: 2px solid var(--primary);
+      color: var(--primary-dark);
+      border-radius: 10px;
+      padding: 10px 22px;
+      font-weight: 700;
+      transition: all 0.25s ease;
+    }
+
+    .btn-outline-custom:hover {
+      background: var(--primary-subtle);
+      color: var(--primary-dark);
+    }
+
+    .hero {
+      padding: 140px 0 80px;
+      background: radial-gradient(circle at top left, #f0fdf4 0%, #ffffff 60%);
+      overflow: hidden;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--primary-subtle);
+      color: var(--primary-dark);
+      border: 1px solid #d1fae5;
+      border-radius: 30px;
+      padding: 6px 14px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.3rem, 5vw, 3.8rem);
+      line-height: 1.15;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      color: var(--navy);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      color: var(--primary);
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.1rem;
+      max-width: 530px;
+      margin-bottom: 30px;
+    }
+
+    .hero-img {
+      width: 100%;
+      max-height: 420px;
+      object-fit: contain;
+      filter: drop-shadow(0 15px 30px rgba(15, 23, 42, 0.08));
+    }
+
+    .section {
+      padding: 85px 0;
+    }
+
+    .section-heading {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 50px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+    }
+
+    .stats {
+      padding: 35px 0;
+      background: var(--navy);
+      color: white;
+    }
+
+    .stat-item {
+      padding: 15px;
+      text-align: center;
+    }
+
+    .stat-item i {
+      font-size: 2rem;
+      color: var(--primary);
+    }
+
+    .stat-item h3 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin: 8px 0 2px;
+    }
+
+    .stat-item p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #94a3b8;
+    }
+
+    .feature-card {
+      height: 100%;
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 30px 24px;
+      background: white;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(15, 23, 42, 0.06);
+    }
+
+    .feature-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 55px;
+      height: 55px;
+      border-radius: 14px;
+      background: var(--primary-subtle);
+      color: var(--primary);
+      font-size: 1.6rem;
+      margin-bottom: 18px;
+    }
+
+    .feature-card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+
+    .feature-card p {
+      color: var(--muted);
+      margin-bottom: 20px;
+      font-size: 0.95rem;
+    }
+
+    .about-image {
+      width: 100%;
+      max-height: 390px;
+      object-fit: cover;
+      border-radius: 18px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+    }
+
+    .check-list {
+      padding: 0;
+      list-style: none;
+    }
+
+    .check-list li {
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+
+    .check-list i {
+      color: var(--primary);
+      font-size: 1.2rem;
+      margin-right: 8px;
+    }
+
+    .waste-section {
+      background: var(--bg-soft);
+    }
+
+    .waste-card {
+      background: white;
+      border-radius: 14px;
+      padding: 24px;
+      height: 100%;
+      border: 1px solid var(--border-color);
+      transition: border-color 0.2s ease;
+    }
+
+    .waste-card:hover {
+      border-color: var(--primary);
+    }
+
+    .waste-card i {
+      font-size: 2rem;
+      color: var(--primary);
+    }
+
+    .waste-card h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-top: 14px;
+    }
+
+    .faq .accordion-item {
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+
+    .faq .accordion-button {
+      font-weight: 700;
+      padding: 20px;
+      color: var(--navy);
+    }
+
+    .faq .accordion-button:not(.collapsed) {
+      color: var(--primary-dark);
+      background: var(--primary-subtle);
+      box-shadow: none;
+    }
+
+    .faq .accordion-button:focus {
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+    }
+
+    .cta {
+      padding: 60px 0;
+      background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%);
+      border-top: 1px solid #d1fae5;
+      border-bottom: 1px solid #d1fae5;
+    }
+
+    .cta h2 {
+      color: var(--navy);
+      letter-spacing: -0.5px;
+    }
+
+    footer {
+      background: var(--navy);
+      color: #94a3b8;
+      padding: 60px 0 25px;
+    }
+
+    footer h3,
+    footer h4 {
+      color: white;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    footer a {
+      color: #cbd5e1;
+      transition: color 0.2s ease;
+    }
+
+    footer a:hover {
+      color: var(--primary);
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #1e293b;
+      margin-top: 35px;
+      padding-top: 22px;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 991px) {
+      .hero {
+        padding-top: 115px;
+      }
+
+      .hero-img {
+        max-height: 280px;
+        margin-bottom: 25px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#home" aria-label="WMS Home">
+        <i class="bi bi-recycle brand-icon"></i> WMS
+      </a>
+
+      <button class="navbar-toggler" type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#mainNavbar"
+              aria-controls="mainNavbar"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNavbar">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="#home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#services">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#faq">FAQ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="adminlogin/welcome.php">
+              Track Complaints
+            </a>
+          </li>
+          <li class="nav-item ms-lg-2">
+            <!-- Professional replacement for "Report a Problem" -->
+            <a class="btn btn-action-primary" href="phpGmailSMTP/trash.php">
+              <i class="bi bi-plus-circle"></i> File Complaint
+            </a>
+          </li>
+          <li class="nav-item ms-lg-2">
+            <a class="nav-link" href="logout-user.php">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-6">
+            <span class="eyebrow">
+              <i class="bi bi-shield-check"></i>
+              Municipal Sanitation Portal
+            </span>
+
+            <h1>
+              A Cleaner City Starts With <span>You.</span>
+            </h1>
+
+            <p>
+              Submit waste overflow reports directly to municipal officers, 
+              track ongoing cleanup efforts in real time, and build a cleaner locality.
+            </p>
+
+            <div class="d-flex flex-wrap gap-3">
+              <a href="phpGmailSMTP/trash.php" class="btn btn-action-primary">
+                Lodge Complaint <i class="bi bi-arrow-right"></i>
+              </a>
+              <a href="#about" class="btn btn-outline-custom">
+                Learn More
+              </a>
+            </div>
+
+            <p class="mt-4 mb-0 small text-muted">
+              <i class="bi bi-check-circle-fill text-success me-2"></i>
+              Fast resolution • Municipal verified action
+            </p>
+          </div>
+
+          <div class="col-lg-6 text-center">
+            <img
+              src="assets/img/recycling.jpeg"
+              class="hero-img"
+              alt="Waste management"
+              fetchpriority="high">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Highlights -->
+    <section class="stats" aria-label="Waste management priorities">
+      <div class="container">
+        <div class="row">
+          <div class="col-6 col-lg-3 stat-item">
+            <i class="bi bi-send-check"></i>
+            <h3>Lodge</h3>
+            <p>Sanitation complaints</p>
+          </div>
+          <div class="col-6 col-lg-3 stat-item">
+            <i class="bi bi-clipboard2-pulse"></i>
+            <h3>Track</h3>
+            <p>Live resolution status</p>
+          </div>
+          <div class="col-6 col-lg-3 stat-item">
+            <i class="bi bi-recycle"></i>
+            <h3>Recycle</h3>
+            <p>Eco-friendly sorting</p>
+          </div>
+          <div class="col-6 col-lg-3 stat-item">
+            <i class="bi bi-tree"></i>
+            <h3>Protect</h3>
+            <p>Our environment</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6">
+            <img
+              src="assets/img/recycling5.png"
+              class="about-image"
+              loading="lazy"
+              alt="Recycling awareness">
+          </div>
+
+          <div class="col-lg-6">
+            <span class="eyebrow">Platform Overview</span>
+            <h2 class="fw-bold mb-3">
+              Direct Communication With Municipal Teams
+            </h2>
+
+            <p class="text-muted">
+              The Smart Waste Management System bridges the gap between citizens
+              and urban local authorities to ensure rapid garbage removal and transparent updates.
+            </p>
+
+            <ul class="check-list">
+              <li>
+                <i class="bi bi-check-circle-fill"></i>
+                Upload photos with exact locations for instant officer routing.
+              </li>
+              <li>
+                <i class="bi bi-check-circle-fill"></i>
+                Real-time status tracking from Pending to Completed.
+              </li>
+              <li>
+                <i class="bi bi-check-circle-fill"></i>
+                Guidance on source segregation for domestic waste.
+              </li>
+              <li>
+                <i class="bi bi-check-circle-fill"></i>
+                Helps keep neighborhoods litter-free and hygienic.
+              </li>
+            </ul>
+
+            <a href="#services" class="btn btn-action-primary mt-2">
+              Explore Services
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section class="section waste-section" id="services">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Citizen Services</span>
+          <h2>Municipal Support Features</h2>
+          <p>
+            Quick options to take immediate action on sanitation issues in your area.
+          </p>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-4">
+            <article class="feature-card">
+              <div class="feature-icon">
+                <i class="bi bi-camera"></i>
+              </div>
+              <h3>File Waste Complaint</h3>
+              <p>
+                Report overflowing bins, illegal street dumps, and public litter directly with photo proof.
+              </p>
+              <a href="phpGmailSMTP/trash.php" class="fw-bold" style="color: var(--primary-dark);">
+                Submit Complaint <i class="bi bi-arrow-right"></i>
+              </a>
+            </article>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <article class="feature-card">
+              <div class="feature-icon">
+                <i class="bi bi-clipboard2-check"></i>
+              </div>
+              <h3>Live Status Tracking</h3>
+              <p>
+                Check inspection updates and follow up on complaints submitted by you and your community.
+              </p>
+              <a href="adminlogin/welcome.php" class="fw-bold" style="color: var(--primary-dark);">
+                View Complaint Portal <i class="bi bi-arrow-right"></i>
+              </a>
+            </article>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <article class="feature-card">
+              <div class="feature-icon">
+                <i class="bi bi-recycle"></i>
+              </div>
+              <h3>Waste Segregation</h3>
+              <p>
+                Learn optimal separation for organic, dry recyclable, and hazardous domestic waste.
+              </p>
+              <a href="#waste-types" class="fw-bold" style="color: var(--primary-dark);">
+                Read Guidelines <i class="bi bi-arrow-right"></i>
+              </a>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Waste Types -->
+    <section class="section" id="waste-types">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Segregation Guide</span>
+          <h2>Know Your Waste Categories</h2>
+          <p>
+            Proper separation at the household level improves recycling efficiency.
+          </p>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-sm-6 col-lg-3">
+            <article class="waste-card">
+              <i class="bi bi-egg-fried"></i>
+              <h3>Wet Waste</h3>
+              <p class="text-muted mb-0 small">
+                Food scraps, fruit and vegetable peels. Ideal for local composting.
+              </p>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-3">
+            <article class="waste-card">
+              <i class="bi bi-box-seam"></i>
+              <h3>Dry Waste</h3>
+              <p class="text-muted mb-0 small">
+                Clean plastics, cardboard, newspapers, and packaging materials.
+              </p>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-3">
+            <article class="waste-card">
+              <i class="bi bi-battery-charging"></i>
+              <h3>E-Waste</h3>
+              <p class="text-muted mb-0 small">
+                Batteries, cables, broken appliances, and electronic parts.
+              </p>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-3">
+            <article class="waste-card">
+              <i class="bi bi-shield-exclamation"></i>
+              <h3>Hazardous Waste</h3>
+              <p class="text-muted mb-0 small">
+                Paint cans, medical waste, and chemicals requiring cautious handling.
+              </p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to action -->
+    <section class="cta">
+      <div class="container">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-8">
+            <h2 class="fw-bold mb-2">Spot Garbage in Your Neighborhood?</h2>
+            <p class="text-muted mb-lg-0">
+              Notify municipal sanitary inspectors immediately by submitting a verified complaint with photos.
+            </p>
+          </div>
+          <div class="col-lg-4 text-lg-end">
+            <a href="phpGmailSMTP/trash.php" class="btn btn-action-primary">
+              <i class="bi bi-send-fill"></i> Lodge Complaint Now
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section faq" id="faq">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Support</span>
+          <h2>Frequently Asked Questions</h2>
+          <p>Quick answers about the complaint process and platform operations.</p>
+        </div>
+
+        <div class="accordion" id="faqAccordion">
+
+          <div class="accordion-item">
+            <h3 class="accordion-header" id="headingOne">
+              <button class="accordion-button" type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#faqOne"
+                      aria-expanded="true"
+                      aria-controls="faqOne">
+                How do I register a waste complaint?
+              </button>
+            </h3>
+            <div id="faqOne" class="accordion-collapse collapse show"
+                 aria-labelledby="headingOne"
+                 data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Click on the <strong>File Complaint</strong> button, select your district/location, 
+                provide street landmark details, attach a photo of the waste spot, and click Register.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h3 class="accordion-header" id="headingTwo">
+              <button class="accordion-button collapsed" type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#faqTwo"
+                      aria-expanded="false"
+                      aria-controls="faqTwo">
+                How can I check the cleanup status?
+              </button>
+            </h3>
+            <div id="faqTwo" class="accordion-collapse collapse"
+                 aria-labelledby="headingTwo"
+                 data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Navigate to <strong>Track Complaints</strong> from the menu bar to view recorded tickets 
+                and see whether the status is Marked as Pending, In Progress, or Completed.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h3 class="accordion-header" id="headingThree">
+              <button class="accordion-button collapsed" type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#faqThree"
+                      aria-expanded="false"
+                      aria-controls="faqThree">
+                Who reviews and acts on the complaints?
+              </button>
+            </h3>
+            <div id="faqThree" class="accordion-collapse collapse"
+                 aria-labelledby="headingThree"
+                 data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Assigned Municipal Officers and local sanitation teams review ticket details, 
+                dispatch cleaning staff to the marked location, and mark tickets resolved.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <h3><i class="bi bi-recycle text-success me-2"></i>WMS</h3>
+          <p>
+            Smart Waste Management & Municipal Complaint Redressal System 
+            empowering citizens and urban local bodies.
+          </p>
+        </div>
+
+        <div class="col-sm-6 col-lg-4">
+          <h4>Quick Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Platform</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#waste-types">Waste Types</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+
+        <div class="col-sm-6 col-lg-4">
+          <h4>Citizen Services</h4>
+          <ul class="footer-links">
+            <li>
+              <a href="phpGmailSMTP/trash.php">Lodge Complaint</a>
+            </li>
+            <li>
+              <a href="adminlogin/welcome.php">Track Status</a>
+            </li>
+            <li>
+              <a href="logout-user.php">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom d-flex flex-column flex-md-row
+                  justify-content-between gap-2">
+        <span>
+          &copy; <span id="currentYear"></span> Smart Waste Management System.
+        </span>
+        <span>Dedicated to cleaner and greener cities.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    document.getElementById("currentYear").textContent = new Date().getFullYear();
+
+    document.querySelectorAll("#mainNavbar .nav-link").forEach(function (link) {
+      link.addEventListener("click", function () {
+        const navbar = document.getElementById("mainNavbar");
+        if (navbar.classList.contains("show")) {
+          bootstrap.Collapse.getOrCreateInstance(navbar).hide();
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
